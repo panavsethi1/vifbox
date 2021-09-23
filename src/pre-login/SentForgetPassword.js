@@ -38,7 +38,7 @@ function SentForgetPassword() {
           <div className="row mt-5 pt-md-5 d-flex justify-content-center">
             <div className="col-md-4">
               <button className="btn preLogin__btn mt-5 text-light">
-                <Link to="/new-password" className="text-light">
+                <Link to="/" className="text-light">
                   DONE
                 </Link>
               </button>

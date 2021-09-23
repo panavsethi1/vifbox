@@ -2,9 +2,49 @@ import React from "react";
 import logo from "../logo.png";
 import "./PreLogin.css";
 import gitHub from "../Assets/img/gitHub.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Field, Formik, Form } from "formik";
+import url from "../Services/axois";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function SignUp() {
+  const history = useHistory();
+  const initialValues = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+  };
+  const signUp = (values) => {
+    console.log(values);
+    axios
+      .post(`${url}/api/register/`, values)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 200) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: res,
+          });
+          history.push("/");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: res,
+          });
+        }
+      })
+      .catch((e) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: e,
+        });
+      });
+  };
   return (
     <div className="preLogin">
       <section className="navbar__section">
@@ -40,61 +80,69 @@ function SignUp() {
           </div>
           <div className="row mt-5 pt-md-5">
             <div className="col-md-7">
-              <form>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label for="firstname">First Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="firstname"
-                        aria-describedby="emailHelp"
-                        placeholder="Enter firstname"
-                      />
+              <Formik initialValues={initialValues} onSubmit={signUp}>
+                <Form>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="first_name">First Name</label>
+                        <Field
+                          type="text"
+                          className="form-control"
+                          id="first_name"
+                          name="first_name"
+                          aria-describedby="emailHelp"
+                          placeholder="Enter firstname"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label htmlFor="last_name">Last Name</label>
+                        <Field
+                          type="text"
+                          className="form-control"
+                          id="last_name"
+                          name="last_name"
+                          aria-describedby="emailHelp"
+                          placeholder="Enter lastname"
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label for="lastname">Last Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="lastname"
-                        aria-describedby="emailHelp"
-                        placeholder="Enter lastname"
-                      />
-                    </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <Field
+                      type="text"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter email"
+                    />
                   </div>
-                </div>
-                <div className="form-group">
-                  <label for="email">Email</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="email"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                  />
-                </div>
-                <div className="form-group mt-4">
-                  <label for="username">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="username"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter password"
-                  />
-                </div>
-                <button className="btn preLogin__btn mt-5">REGISTER</button>
-                <p className="text-center mt-2" style={{ fontSize: "14px" }}>
-                  By signing in, you agree to Vifbox's
-                  <span className="color__primary">Terms and Conditions</span>
-                  and
-                  <span className="color__primary"> Privacy Policy</span>
-                </p>
-              </form>
+                  <div className="form-group mt-4">
+                    <label htmlFor="password">Password</label>
+                    <Field
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      name="password"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter password"
+                    />
+                  </div>
+                  <button className="btn preLogin__btn mt-5" type="submit">
+                    REGISTER
+                  </button>
+                  <p className="text-center mt-2" style={{ fontSize: "14px" }}>
+                    By signing in, you agree to Vifbox's
+                    <span className="color__primary">Terms and Conditions</span>
+                    and
+                    <span className="color__primary"> Privacy Policy</span>
+                  </p>
+                </Form>
+              </Formik>
             </div>
             <div className="col-md-1">
               <span className="vl"></span>

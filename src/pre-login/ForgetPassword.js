@@ -1,10 +1,49 @@
 import React from "react";
 import logo from "../logo.png";
 import "./PreLogin.css";
-import gitHub from "../Assets/img/gitHub.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Field, Formik, Form } from "formik";
+import url from "../Services/axois";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function ForgetPassword() {
+  const history = useHistory();
+  const initialValues = {
+    email: "",
+  };
+  const token = localStorage.getItem("auth_pass");
+  console.log(token);
+
+  const forgetPassword = (values) => {
+    console.log(values);
+    axios
+      .post(`${url}/api/password/reset/`, values, {
+        headers: { Authorization: token },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          localStorage.setItem("auth_pass", res.data.access);
+          localStorage.setItem("refresh_auth_pass", res.data.refresh);
+          history.push("/sent-forget-password");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong !!",
+          });
+        }
+      })
+      .catch((e) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: e,
+        });
+      });
+  };
+
   return (
     <div className="preLogin">
       <section className="navbar__section">
@@ -23,7 +62,7 @@ function ForgetPassword() {
           </div>
         </div>
       </section>
-      <section className="main__preLogin__section">
+      <section className="main__preLogin__section mt-5 pt-5">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -36,33 +75,34 @@ function ForgetPassword() {
           </div>
           <div className="row mt-5 pt-md-5 d-flex justify-content-center">
             <div className="col-md-6">
-              <form>
-                <div className="form-group">
-                  <label for="username">Email email</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter username"
-                  />
-                </div>
+              <Formik initialValues={initialValues} onSubmit={forgetPassword}>
+                <Form>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <Field
+                      type="text"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter email"
+                    />
+                  </div>
 
-                <div className="row">
-                  <div className="col-6">
-                    <button className="btn preLogin__btn__outline mt-5">
-                      BACK
-                    </button>
-                  </div>
-                  <div className="col-6">
-                    <button className="btn preLogin__btn mt-5">
-                      <Link to="/sent-forget-password" className="text-light">
+                  <div className="row">
+                    <div className="col-6">
+                      <button className="btn preLogin__btn__outline mt-5">
+                        BACK
+                      </button>
+                    </div>
+                    <div className="col-6">
+                      <button className="btn preLogin__btn mt-5" type="submit">
                         SEND
-                      </Link>
-                    </button>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </form>
+                </Form>
+              </Formik>
             </div>
           </div>
         </div>
