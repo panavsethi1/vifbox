@@ -7,6 +7,11 @@ import url from "../Services/axois";
 import Swal from "sweetalert2";
 import refreshToken from "../Services/auth";
 import { useHistory } from "react-router-dom";
+import themes from "./themes";
+import Dropdown from "./Dropdown";
+import Select from "react-select";
+import tick from "../Assets/img/tick.png";
+import exclamation from "../Assets/img/exclamation.png";
 
 function Profile() {
   const history = useHistory();
@@ -16,14 +21,32 @@ function Profile() {
   const [passwordCntrl3, setpasswordCntrl3] = useState(true);
   const token = localStorage.getItem("auth_pass");
 
-  // function auth() {
-  //   if (token) {
-  //     history.push("/profile");
-  //   } else {
-  //     history.push("/");
-  //     window.location.reload();
-  //   }
-  // }
+  const [theme, setTheme] = useState("");
+
+  const options = [];
+
+  Object.keys(themes).forEach((theme) => {
+    options.push({
+      value: theme,
+      label: theme.charAt(0).toUpperCase() + theme.slice(1),
+    });
+  });
+
+  const handleChange = (selectedTheme) => {
+    setTheme(themes[selectedTheme.value]);
+  };
+  const refCallback = (node) => {
+    if (node) {
+      theme &&
+        Object.keys(theme).forEach((element) => {
+          node.style.setProperty(element, theme[element], "important");
+          if (element === "background-color" || element === "background") {
+            // apply the same background mentioned for theme to the body of the website
+            document.body.style.background = theme[element];
+          }
+        });
+    }
+  };
 
   function getUserData() {
     axios
@@ -36,12 +59,14 @@ function Profile() {
         }
       })
       .catch((error) => {
+        console.log(error.response);
         if (error.response.data.code === 400) {
           Swal.fire({
             icon: "error",
             text: error.response.data.message,
           });
-        } else if (error.response.data.code === 403) {
+        }
+        if (error.response.data.code === 403) {
           Swal.fire({
             icon: "error",
             text: error.response.data.message,
@@ -58,7 +83,6 @@ function Profile() {
   };
   useEffect(() => {
     // refreshToken();
-    // auth();
     getUserData();
   }, []);
 
@@ -82,7 +106,8 @@ function Profile() {
             icon: "error",
             text: error.response.data.message,
           });
-        } else if (error.response.data.code === 403) {
+        }
+        if (error.response.data.code === 403) {
           Swal.fire({
             icon: "error",
             text: error.response.data.message,
@@ -116,7 +141,44 @@ function Profile() {
             icon: "error",
             text: error.response.data.message,
           });
-        } else if (error.response.data.code === 403) {
+        }
+        if (error.response.data.code === 403) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+          refreshToken();
+        }
+      });
+  };
+
+  const initialValuesCompany = {
+    company_email: data.company_email,
+    company_name: data.company_name,
+  };
+
+  const companyUpdate = (values, onSubmitProps) => {
+    axios
+      .put(`${url}/api/profile/set_company/`, values, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            icon: "success",
+            text: res.data.message,
+          });
+          getUserData();
+        }
+      })
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        }
+        if (error.response.data.code === 403) {
           Swal.fire({
             icon: "error",
             text: error.response.data.message,
@@ -127,13 +189,13 @@ function Profile() {
   };
 
   return (
-    <div className="profile">
+    <div className="profile" ref={refCallback}>
       <Navbar />
 
-      <section className="profile__section mt-5">
+      <section className="profile__section mt-3">
         <div className="container-fluid">
           <div className="row pb-5 flex-wrap">
-            <div className="col-md-4">
+            <div className="col-md-4 mt-3">
               <div className="card">
                 <div className="card-body">
                   <h5>PERSONAL INFORMATION</h5>
@@ -212,7 +274,7 @@ function Profile() {
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 mt-3">
               <div className="card">
                 <div className="card-body">
                   <h5>CHANGE PASSWORD</h5>
@@ -319,43 +381,49 @@ function Profile() {
                 </div>
               </div>
             </div>
-            {/* <div className="col-md-4">
+            <div className="col-md-4 mt-3">
               <div className="card">
                 <div className="card-body">
                   <h5>COMPANY INFORMATION</h5>
 
-                  <Formik>
+                  <Formik
+                    initialValues={initialValuesCompany}
+                    onSubmit={companyUpdate}
+                    enableReinitialize
+                  >
                     <Form>
                       <div className="row mt-4">
                         <div className="col-md-12">
                           <div className="form-group">
-                            <label htmlFor="name">Company Name</label>
+                            <label htmlFor="company_name">Company Name</label>
                             <Field
                               type="text"
                               className="form-control"
-                              id="name"
+                              id="company_name"
+                              name="company_name"
                               aria-describedby="emailHelp"
-                              placeholder="Enter name"
+                              placeholder="Enter Company Name"
                             />
                           </div>
                         </div>
                         <div className="col-md-12">
                           <div className="form-group">
-                            <label htmlFor="email">Company Email</label>
+                            <label htmlFor="company_email">Company Email</label>
                             <Field
                               type="text"
                               className="form-control"
-                              id="email"
+                              id="company_email"
+                              name="company_email"
                               aria-describedby="emailHelp"
-                              placeholder="Enter email"
+                              placeholder="Enter company email"
                             />
                           </div>
                         </div>
                       </div>
                       <div className="row mt-4 justify-content-center">
-                        <div className="col-md-5">
+                        {/* <div className="col-md-5">
                           <button className="btn btn__close">CLOSE</button>
-                        </div>
+                        </div> */}
                         <div className="col-md-5">
                           <button className="btn btn__save">SAVE</button>
                         </div>
@@ -364,8 +432,8 @@ function Profile() {
                   </Formik>
                 </div>
               </div>
-            </div> */}
-            {/* <div className="col-md-4 mt-5">
+            </div>
+            <div className="col-md-4 mt-3">
               <div className="card">
                 <div className="card-body">
                   <h5>ACCOUNT SECURITY</h5>
@@ -395,11 +463,11 @@ function Profile() {
                   </div>
                 </div>
               </div>
-            </div> */}
-            {/* <div className="col-md-4 mt-5">
+            </div>
+            <div className="col-md-4 mt-3">
               <div className="card">
                 <div className="card-body">
-                  <h5>COMPANY INFORMATION</h5>
+                  <h5>SETTINGS</h5>
 
                   <Formik>
                     <Form>
@@ -407,13 +475,11 @@ function Profile() {
                         <div className="col-md-12">
                           <div className="form-group">
                             <label htmlFor="name">Theme</label>
-                            <select
-                              className="form-control"
-                              id="exampleFormControlSelect1"
-                            >
-                              <option>Dark</option>
-                              <option>Light</option>
-                            </select>
+                            <Select
+                              className="select-filter"
+                              onChange={handleChange}
+                              options={options}
+                            />
                           </div>
                         </div>
                         <div className="col-md-12">
@@ -430,9 +496,9 @@ function Profile() {
                         </div>
                       </div>
                       <div className="row mt-4 justify-content-center">
-                        <div className="col-md-5">
+                        {/* <div className="col-md-5">
                           <button className="btn btn__close">CLOSE</button>
-                        </div>
+                        </div> */}
                         <div className="col-md-5">
                           <button className="btn btn__save">SAVE</button>
                         </div>
@@ -441,7 +507,7 @@ function Profile() {
                   </Formik>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </section>

@@ -10,6 +10,7 @@ const refreshToken = () => {
     .post(`${url}/api/token/refresh/`, refresh__token__obj)
     .then((res) => {
       localStorage.setItem("auth_pass", res.data.access);
+      window.location.reload();
     })
     .catch((e) => {
       if ("Please login") {

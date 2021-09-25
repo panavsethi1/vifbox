@@ -7,6 +7,7 @@ import { Field, Formik, Form } from "formik";
 import url from "../Services/axois";
 import axios from "axios";
 import Swal from "sweetalert2";
+import LoginGithub from "react-login-github";
 
 function Login() {
   const [passwordCntrl1, setpasswordCntrl1] = useState(true);
@@ -34,6 +35,9 @@ function Login() {
         }
       });
   };
+
+  const onSuccess = (response) => console.log(response);
+  const onFailure = (response) => console.error(response);
 
   return (
     <div className="preLogin">
@@ -151,8 +155,21 @@ function Login() {
             <div className="col-md-1">
               <span className="vl"></span>
             </div>
-            <div className="col-md-3 d-flex justify-content-center align-items-center">
-              <img src={gitHub} alt="" className="img-fluid github__img" />
+            <div className="col-md-3 mb-5 d-flex justify-content-center align-items-center">
+              <button className="btn github__btn d-flex align-items-center">
+                <img
+                  src={gitHub}
+                  className="img-fluid"
+                  style={{ width: "50px" }}
+                />
+                <LoginGithub
+                  clientId="65ad233b6c86eb522646"
+                  onSuccess={onSuccess}
+                  onFailure={onFailure}
+                />
+              </button>
+
+              {/* <img src={gitHub} alt="" className="img-fluid github__img" /> */}
             </div>
           </div>
         </div>

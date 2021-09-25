@@ -8,6 +8,7 @@ import axios from "axios";
 import url from "../Services/axois";
 import Swal from "sweetalert2";
 import refreshToken from "../Services/auth";
+import Dropdown from "./Dropdown";
 
 function Navbar() {
   const history = useHistory();
@@ -30,11 +31,9 @@ function Navbar() {
             icon: "error",
             text: error.response.data.message,
           });
-        } else if (error.response.data.code === 403) {
-          Swal.fire({
-            icon: "error",
-            text: error.response.data.message,
-          });
+        }
+        if (error.response.data.code === 403) {
+          refreshToken();
         }
       });
   };
