@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../logo.png";
 import "./PreLogin.css";
 import gitHub from "../Assets/img/gitHub.png";
@@ -9,17 +9,16 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 function Login() {
+  const [passwordCntrl1, setpasswordCntrl1] = useState(true);
   const history = useHistory();
   const initialValues = {
     email: "",
     password: "",
   };
   const signIn = (values) => {
-    console.log(values);
     axios
       .post(`${url}/api/login/`, values)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           localStorage.setItem("auth_pass", res.data.access);
           localStorage.setItem("refresh_auth_pass", res.data.refresh);
@@ -86,18 +85,33 @@ function Login() {
                       name="email"
                       aria-describedby="emailHelp"
                       placeholder="Enter email"
+                      required
                     />
                   </div>
-                  <div className="form-group mt-4">
+                  <div
+                    className="form-group mt-4"
+                    style={{ position: "relative" }}
+                  >
                     <label htmlFor="password">Password</label>
                     <Field
-                      type="password"
+                      type={passwordCntrl1 ? "password" : "text"}
                       className="form-control"
                       id="password"
                       name="password"
                       aria-describedby="emailHelp"
                       placeholder="Enter password"
+                      required
                     />
+                    <i
+                      className={
+                        passwordCntrl1
+                          ? "fa fa-eye-slash fa-lg"
+                          : "fa fa-eye fa-lg active"
+                      }
+                      id="change_password_eyeslash1"
+                      onClick={() => setpasswordCntrl1(!passwordCntrl1)}
+                      style={{ fontSize: "15px" }}
+                    ></i>
                   </div>
                   <div className="row">
                     {/* <div className="col-6">

@@ -1,9 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Field, Form, Formik } from "formik";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 import logo from "../logo.png";
+import url from "../Services/axois";
 import "./PreLogin.css";
 
 function NewPassword() {
+  const history = useHistory();
+  const [passwordCntrl1, setpasswordCntrl1] = useState(true);
+  const [passwordCntrl2, setpasswordCntrl2] = useState(true);
+  const initialValues = {
+    new_pass: "",
+    confirm_new_pass: "",
+  };
+  const queryParams = new URLSearchParams(window.location.search);
+  const token = queryParams.get("token");
+
+  const newPassword = (values, onSubmitProps) => {
+    axios
+      .post(`${url}/api/password/reset/confirm/?token=${token}`, values)
+      .then((res) => {
+        if (res.status === 200) {
+          onSubmitProps.resetForm();
+          Swal.fire({
+            icon: "success",
+            text: res.data.message,
+          });
+          history.push("/");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong !!",
+          });
+        }
+      })
+      .catch((e) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: e,
+        });
+      });
+  };
+
   return (
     <div className="preLogin">
       <section className="navbar__section">
@@ -33,43 +75,65 @@ function NewPassword() {
           </div>
           <div className="row mt-5 pt-md-5 d-flex justify-content-center">
             <div className="col-md-6">
-              <form>
-                <div className="form-group">
-                  <label for="newPassword">New Password</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="newPassword"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter new password"
-                  />
-                </div>
-                <div className="form-group mt-4">
-                  <label for="confirmPassword">Confirm New Password</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="confirmPassword"
-                    aria-describedby="emailHelp"
-                    placeholder="Re-Enter password"
-                  />
-                </div>
+              <Formik initialValues={initialValues} onSubmit={newPassword}>
+                <Form>
+                  <div className="form-group" style={{position:"relative"}}>
+                    <label htmlFor="new_pass">New Password</label>
+                    <Field
+                     type={passwordCntrl1 ? "password" : "text"}
+                      className="form-control"
+                      id="new_pass"
+                      name="new_pass"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter new password"
+                    />
+                     <i
+                      className={
+                        passwordCntrl1
+                          ? "fa fa-eye-slash fa-lg"
+                          : "fa fa-eye fa-lg active"
+                      }
+                      id="change_password_eyeslash1"
+                      onClick={() => setpasswordCntrl1(!passwordCntrl1)}
+                      style={{ fontSize: "15px" }}
+                    ></i>
+                  </div>
+                  <div className="form-group mt-4" style={{position:"relative"}}>
+                    <label htmlFor="confirm_new_pass">
+                      Confirm New Password
+                    </label>
+                    <Field
+                     type={passwordCntrl2 ? "password" : "text"}
+                      className="form-control"
+                      id="confirm_new_pass"
+                      name="confirm_new_pass"
+                      aria-describedby="emailHelp"
+                      placeholder="Re-Enter password"
+                    />
+                     <i
+                      className={
+                        passwordCntrl2
+                          ? "fa fa-eye-slash fa-lg"
+                          : "fa fa-eye fa-lg active"
+                      }
+                      id="change_password_eyeslash1"
+                      onClick={() => setpasswordCntrl2(!passwordCntrl2)}
+                      style={{ fontSize: "15px" }}
+                    ></i>
+                  </div>
 
-                <div className="row">
-                  <div className="col-6">
-                    <button className="btn preLogin__btn__outline mt-5">
-                      BACK
-                    </button>
+                  <div className="row">
+                    <div className="col-6">
+                      <button className="btn preLogin__btn__outline mt-5">
+                        BACK
+                      </button>
+                    </div>
+                    <div className="col-6">
+                      <button className="btn preLogin__btn mt-5">SUBMIT</button>
+                    </div>
                   </div>
-                  <div className="col-6">
-                    <button className="btn preLogin__btn mt-5">
-                      <Link to="/" className="text-light">
-                        Done
-                      </Link>
-                    </button>
-                  </div>
-                </div>
-              </form>
+                </Form>
+              </Formik>
             </div>
           </div>
         </div>

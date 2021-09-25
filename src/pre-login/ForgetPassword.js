@@ -13,19 +13,14 @@ function ForgetPassword() {
     email: "",
   };
   const token = localStorage.getItem("auth_pass");
-  console.log(token);
 
   const forgetPassword = (values) => {
-    console.log(values);
     axios
       .post(`${url}/api/password/reset/`, values, {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
-          localStorage.setItem("auth_pass", res.data.access);
-          localStorage.setItem("refresh_auth_pass", res.data.refresh);
           history.push("/sent-forget-password");
         } else {
           Swal.fire({
@@ -86,13 +81,17 @@ function ForgetPassword() {
                       name="email"
                       aria-describedby="emailHelp"
                       placeholder="Enter email"
+                      required
                     />
                   </div>
 
                   <div className="row">
                     <div className="col-6">
-                      <button className="btn preLogin__btn__outline mt-5">
-                        BACK
+                      <button
+                        className="btn preLogin__btn__outline mt-5"
+                        type="button"
+                      >
+                        <Link to="/" className="text-dark">BACK</Link>
                       </button>
                     </div>
                     <div className="col-6">

@@ -1,0 +1,37 @@
+.profile {
+  background: #e5ebef;
+  /* height: 100vh; */
+}
+
+.profile__section .card {
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.161));
+  border-radius: 8px;
+  height: 100%;
+}
+.profile__section label {
+  color: #7c96a5;
+}
+
+.profile__section input, .profile__section select {
+  background: #e5ebef;
+  border: 1px solid #e5ebef;
+}
+.profile__section .btn__close {
+  filter: drop-shadow(0px 18px 40px rgba(162, 162, 162, 0.349));
+  background: #ffffff;
+  width: 80%;
+}
+.profile__section .btn__save {
+  filter: drop-shadow(0px 18px 40px rgba(25, 72, 154, 0.251));
+  background: #5b922f;
+  color: #fff;
+  width: 80%;
+}
+
+.profile__section small {
+  opacity: 0.8;
+}
+
+.profile__section p {
+  color: #26237b;
+}

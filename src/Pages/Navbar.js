@@ -1,9 +1,57 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../Assets/img/logo_small.png";
 import profile from "../Assets/img/profile.png";
+import logout from "../Assets/img/logout.png";
+import "../Assets/css/Navbar.css";
+import axios from "axios";
+import url from "../Services/axois";
+import Swal from "sweetalert2";
 
 function Navbar() {
+  const history = useHistory();
+  const [data, setData] = useState([]);
+  const token = localStorage.getItem("auth_pass");
+
+  const getUserData = () => {
+    axios
+      .get(`${url}/api/home/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setData(res.data);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong !!",
+          });
+        }
+      })
+      .catch((e) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: e,
+        });
+      });
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  function logOut() {
+    localStorage.removeItem("auth_pass");
+    localStorage.removeItem("refresh_auth_pass");
+    history.push("/");
+    Swal.fire({
+      icon: "success",
+      text: "User Logged Out successfully!",
+    });
+  }
+
   return (
     <div className="navbar__section">
       <div className="container-fluid">
@@ -41,14 +89,39 @@ function Navbar() {
                   </h2>
                 </li>
               </ul>
-              <form className="form-inline my-2 my-lg-0">
+              <div className="form-inline my-2 my-lg-0 d-flex align-items-center">
                 <img
                   src={profile}
                   alt=""
-                  className="img-fluid"
-                  style={{ width: "80px" }}
+                  className="img-fluid mr-2"
+                  style={{ width: "40px" }}
                 />
-              </form>
+
+                <div className="dropdown">
+                  <button
+                    className="dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {data.first_name}
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <div
+                      className="dropdown-item"
+                      onClick={logOut}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <img src={logout} alt="" className="img-fluid" /> Logout
+                    </div>
+                  </div>
+                </div>
+              </div>
               {/* </div> */}
             </nav>
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../logo.png";
 import "./PreLogin.css";
 import gitHub from "../Assets/img/gitHub.png";
@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 
 function SignUp() {
   const history = useHistory();
+  const [passwordCntrl1, setpasswordCntrl1] = useState(true);
   const initialValues = {
     first_name: "",
     last_name: "",
@@ -17,11 +18,9 @@ function SignUp() {
     password: "",
   };
   const signUp = (values) => {
-    console.log(values);
     axios
       .post(`${url}/api/register/`, values)
       .then((res) => {
-        console.log(res);
         if (res.data.status === 200) {
           Swal.fire({
             icon: "error",
@@ -93,6 +92,7 @@ function SignUp() {
                           name="first_name"
                           aria-describedby="emailHelp"
                           placeholder="Enter firstname"
+                          required
                         />
                       </div>
                     </div>
@@ -106,6 +106,7 @@ function SignUp() {
                           name="last_name"
                           aria-describedby="emailHelp"
                           placeholder="Enter lastname"
+                          required
                         />
                       </div>
                     </div>
@@ -119,18 +120,33 @@ function SignUp() {
                       name="email"
                       aria-describedby="emailHelp"
                       placeholder="Enter email"
+                      required
                     />
                   </div>
-                  <div className="form-group mt-4">
+                  <div
+                    className="form-group mt-4"
+                    style={{ position: "relative" }}
+                  >
                     <label htmlFor="password">Password</label>
                     <Field
-                      type="password"
+                      type={passwordCntrl1 ? "password" : "text"}
                       className="form-control"
                       id="password"
                       name="password"
                       aria-describedby="emailHelp"
                       placeholder="Enter password"
+                      required
                     />
+                    <i
+                      className={
+                        passwordCntrl1
+                          ? "fa fa-eye-slash fa-lg"
+                          : "fa fa-eye fa-lg active"
+                      }
+                      id="change_password_eyeslash1"
+                      onClick={() => setpasswordCntrl1(!passwordCntrl1)}
+                      style={{ fontSize: "15px" }}
+                    ></i>
                   </div>
                   <button className="btn preLogin__btn mt-5" type="submit">
                     REGISTER

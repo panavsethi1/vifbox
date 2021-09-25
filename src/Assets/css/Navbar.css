@@ -1,0 +1,20 @@
+.navbar__section .navbar {
+  background: #fff !important;
+}
+.navbar__section .dropdown-menu {
+  /* right: 0 !important; */
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.161));
+  left: -100px !important;
+}
+.navbar__section .dropdown-toggle {
+  border: none !important;
+  background: transparent !important;
+}
+
+.navbar__section .dropdown-toggle:focus {
+  outline-width: 0 !important ;
+  box-shadow: none !important;
+}
+
+.navbar__section .dropdown-menu {
+}

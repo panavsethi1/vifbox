@@ -1,3 +1,7 @@
+.preLogin {
+  background: #fff;
+  height: 100vh;
+}
 .color__primary {
   color: #26237b;
 }
@@ -39,4 +43,12 @@
     width: 60%;
     margin-top: 40px;
   }
+}
+
+#change_password_eyeslash1 {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  color: #7c96a5;
+  top: 45px
 }
