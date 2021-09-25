@@ -23,22 +23,18 @@ function Login() {
           localStorage.setItem("auth_pass", res.data.access);
           localStorage.setItem("refresh_auth_pass", res.data.refresh);
           history.push("/profile");
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong !!",
-          });
         }
       })
-      .catch((e) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: e,
-        });
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        }
       });
   };
+
   return (
     <div className="preLogin">
       <section className="navbar__section">

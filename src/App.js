@@ -1,12 +1,10 @@
 import "./App.css";
 import Routes from "./Routes/Routes";
 import { BrowserRouter } from "react-router-dom";
-import { useEffect } from "react";
-import axios from "axios";
-import url from "./Services/axois";
+import React from "react";
 
 function App() {
-  
+ 
 
   return (
     <div className="App">

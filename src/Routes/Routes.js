@@ -6,8 +6,10 @@ import ForgetPassword from "../pre-login/ForgetPassword";
 import SentForgetPassword from "../pre-login/SentForgetPassword";
 import NewPassword from "../pre-login/NewPassword";
 import Profile from "../Pages/Profile";
+import PrivateRoute from "./PrivateRoute";
 
 const Routes = () => {
+
   return (
     <Switch>
       <Route exact path="/" component={Login} />
@@ -19,7 +21,7 @@ const Routes = () => {
         component={SentForgetPassword}
       />
       <Route exact path="/new-password" component={NewPassword} />
-      <Route exact path="/profile" component={Profile} />
+      <PrivateRoute exact path="/profile" component={Profile} />
     </Switch>
   );
 };

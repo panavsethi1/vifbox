@@ -7,6 +7,7 @@ import "../Assets/css/Navbar.css";
 import axios from "axios";
 import url from "../Services/axois";
 import Swal from "sweetalert2";
+import refreshToken from "../Services/auth";
 
 function Navbar() {
   const history = useHistory();
@@ -21,20 +22,20 @@ function Navbar() {
       .then((res) => {
         if (res.status === 200) {
           setData(res.data);
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong !!",
-          });
         }
       })
-      .catch((e) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: e,
-        });
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        } else if (error.response.data.code === 403) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        }
       });
   };
 
@@ -58,7 +59,7 @@ function Navbar() {
         <div className="row">
           <div className="col-md-12 p-0">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <Link className="navbar-brand" href="#">
+              <Link to="/" className="navbar-brand">
                 <img
                   src={logo}
                   alt=""

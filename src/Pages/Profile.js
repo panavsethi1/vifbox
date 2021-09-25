@@ -2,22 +2,30 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "../Assets/css/Profile.css";
 import { Field, Form, Formik } from "formik";
-import tick from "../Assets/img/tick.png";
-import exclamation from "../Assets/img/exclamation.png";
 import axios from "axios";
 import url from "../Services/axois";
 import Swal from "sweetalert2";
-import refresh__token__obj from "../Services/auth";
 import refreshToken from "../Services/auth";
+import { useHistory } from "react-router-dom";
 
 function Profile() {
+  const history = useHistory();
   const [data, setData] = useState([]);
   const [passwordCntrl1, setpasswordCntrl1] = useState(true);
   const [passwordCntrl2, setpasswordCntrl2] = useState(true);
   const [passwordCntrl3, setpasswordCntrl3] = useState(true);
   const token = localStorage.getItem("auth_pass");
 
-  const getUserData = () => {
+  // function auth() {
+  //   if (token) {
+  //     history.push("/profile");
+  //   } else {
+  //     history.push("/");
+  //     window.location.reload();
+  //   }
+  // }
+
+  function getUserData() {
     axios
       .get(`${url}/api/profile/`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -25,24 +33,23 @@ function Profile() {
       .then((res) => {
         if (res.status === 200) {
           setData(res.data.data);
-        } else if (res.status === 403) {
-          refreshToken();
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong !!",
-          });
         }
       })
-      .catch((e) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: e,
-        });
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        } else if (error.response.data.code === 403) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+          refreshToken();
+        }
       });
-  };
+  }
   const initialValues = {
     email: data.email,
     name: data.name,
@@ -51,12 +58,13 @@ function Profile() {
   };
   useEffect(() => {
     // refreshToken();
+    // auth();
     getUserData();
   }, []);
 
   const personalInfo = (values) => {
     axios
-      .post(`${url}/api/profile/set_info/`, values, {
+      .put(`${url}/api/profile/set_info/`, values, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -66,6 +74,20 @@ function Profile() {
             text: res.data.message,
           });
           getUserData();
+        }
+      })
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        } else if (error.response.data.code === 403) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+          refreshToken();
         }
       });
   };
@@ -88,7 +110,20 @@ function Profile() {
           });
         }
       })
-      .catch((e) => {});
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        } else if (error.response.data.code === 403) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+          refreshToken();
+        }
+      });
   };
 
   return (

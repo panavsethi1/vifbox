@@ -29,20 +29,15 @@ function NewPassword() {
             text: res.data.message,
           });
           history.push("/");
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong !!",
-          });
         }
       })
-      .catch((e) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: e,
-        });
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        }
       });
   };
 

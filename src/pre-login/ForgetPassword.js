@@ -30,12 +30,13 @@ function ForgetPassword() {
           });
         }
       })
-      .catch((e) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: e,
-        });
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        }
       });
   };
 
@@ -91,7 +92,9 @@ function ForgetPassword() {
                         className="btn preLogin__btn__outline mt-5"
                         type="button"
                       >
-                        <Link to="/" className="text-dark">BACK</Link>
+                        <Link to="/" className="text-dark">
+                          BACK
+                        </Link>
                       </button>
                     </div>
                     <div className="col-6">

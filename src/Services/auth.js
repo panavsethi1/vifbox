@@ -6,10 +6,16 @@ const refresh__token__obj = {
   refresh: refresh_token,
 };
 const refreshToken = () => {
-  axios.post(`${url}/api/token/refresh/`, refresh__token__obj).then((res) => {
-    localStorage.setItem("auth_pass", res.data.access);
-    window.location.reload();
-  });
+  axios
+    .post(`${url}/api/token/refresh/`, refresh__token__obj)
+    .then((res) => {
+      localStorage.setItem("auth_pass", res.data.access);
+    })
+    .catch((e) => {
+      if ("Please login") {
+        window.location.href = "/";
+      }
+    });
 };
 
 export default refreshToken;

@@ -28,20 +28,15 @@ function SignUp() {
             text: res,
           });
           history.push("/");
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: res,
-          });
         }
       })
-      .catch((e) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: e,
-        });
+      .catch((error) => {
+        if (error.response.data.code === 400) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        }
       });
   };
   return (
@@ -148,6 +143,7 @@ function SignUp() {
                       style={{ fontSize: "15px" }}
                     ></i>
                   </div>
+
                   <button className="btn preLogin__btn mt-5" type="submit">
                     REGISTER
                   </button>
