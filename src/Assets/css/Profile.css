@@ -13,10 +13,9 @@
 }
 
 .profile__section input,
-.profile__section select,
-.profile__section {
-  background: #e5ebef !important;
-  border: 1px solid #e5ebef !important;
+.profile__section select {
+  background: #e5ebef;
+  border: 1px solid #e5ebef;
 }
 .profile__section .btn__close {
   filter: drop-shadow(0px 18px 40px rgba(162, 162, 162, 0.349));
@@ -38,14 +37,14 @@
   color: #26237b;
 }
 
-.css-yk16xz-control {
+.css-1s2u09g-control {
   background: #e5ebef !important;
   border: 1px solid #e5ebef !important;
 }
 .css-1okebmr-indicatorSeparator {
   display: none !important;
 }
-.css-6q0nyr-Svg {
+.css-tj5bde-Svg {
   fill: #000 !important;
   opacity: 0.6 !important;
 }
