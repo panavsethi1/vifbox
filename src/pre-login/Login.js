@@ -23,7 +23,7 @@ function Login() {
         if (res.status === 200) {
           localStorage.setItem("auth_pass", res.data.access);
           localStorage.setItem("refresh_auth_pass", res.data.refresh);
-          history.push("/profile");
+          history.push("/dashboard");
         }
       })
       .catch((error) => {

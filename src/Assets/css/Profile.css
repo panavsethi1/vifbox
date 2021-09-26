@@ -1,50 +1,130 @@
 .profile {
-  background: #e5ebef;
-  /* height: 100vh; */
+	background: #e5ebef;
+	/* height: 100vh; */
 }
 
 .profile__section .card {
-  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.161));
-  border-radius: 8px;
-  height: 100%;
+	filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.161));
+	border-radius: 8px;
+	height: 100%;
 }
 .profile__section label {
-  color: #7c96a5;
+	color: #7c96a5;
 }
 
 .profile__section input,
 .profile__section select {
-  background: #e5ebef;
-  border: 1px solid #e5ebef;
+	background: #e5ebef;
+	border: 1px solid #e5ebef;
 }
 .profile__section .btn__close {
-  filter: drop-shadow(0px 18px 40px rgba(162, 162, 162, 0.349));
-  background: #ffffff;
-  width: 80%;
+	filter: drop-shadow(0px 18px 40px rgba(162, 162, 162, 0.349));
+	background: #ffffff;
+	width: 80%;
 }
 .profile__section .btn__save {
-  filter: drop-shadow(0px 18px 40px rgba(25, 72, 154, 0.251));
-  background: #5b922f;
-  color: #fff;
-  width: 80%;
+	filter: drop-shadow(0px 18px 40px rgba(25, 72, 154, 0.251));
+	background: #5b922f;
+	color: #fff;
+	width: 80%;
 }
 
 .profile__section small {
-  opacity: 0.8;
+	opacity: 0.8;
 }
 
 .profile__section p {
-  color: #26237b;
+	color: #26237b;
 }
 
 .css-1s2u09g-control {
-  background: #e5ebef !important;
-  border: 1px solid #e5ebef !important;
+	background: #e5ebef !important;
+	border: 1px solid #e5ebef !important;
 }
 .css-1okebmr-indicatorSeparator {
-  display: none !important;
+	display: none !important;
 }
 .css-tj5bde-Svg {
-  fill: #000 !important;
-  opacity: 0.6 !important;
+	fill: #000 !important;
+	opacity: 0.6 !important;
+}
+
+/* SIDE NAV */
+
+.card-row {
+	margin: 1rem 2rem;
+}
+.card__options {
+	height: fit-content !important;
+}
+
+.card-tab {
+	padding: 1rem 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.card-tab__title {
+	margin: 0;
+	padding: 0;
+	color: #000 !important;
+	font-weight: 600;
+}
+
+.card-tab__arrow {
+	width: 10px;
+}
+
+.card-profile-image {
+	height: fit-content !important;
+}
+
+.card-profile-image__content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.image-upload {
+	width: 150px;
+	height: 150px;
+	margin-top: 1rem;
+	object-fit: cover;
+}
+
+.image-upload > label {
+	position: relative;
+}
+
+.image-upload__preview {
+	width: 150px;
+	height: 100%;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+
+.image-upload__edit {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.image-upload__input {
+	display: none;
+}
+
+.image-upload__title {
+	margin: 2rem 0;
+	text-align: center;
+	background-color: #eeeeee !important;
+	color: #7c96a5;
+	border: none;
+	outline: none;
+	font-weight: 600;
 }
