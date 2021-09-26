@@ -15,6 +15,7 @@ function Navbar(props) {
 	const history = useHistory();
 	const [data, setData] = useState([]);
 	const [profileData, setProfileData] = useState();
+	const [isNotiOpen, setIsNotiOpen] = useState(false);
 	const token = localStorage.getItem('auth_pass');
 
 	const getUserData = () => {
@@ -49,6 +50,10 @@ function Navbar(props) {
 			.catch((err) => console.log(err));
 	};
 
+	const handleNotiClick = () => {
+		setIsNotiOpen(!isNotiOpen);
+	};
+
 	useEffect(() => {
 		getUserData();
 		getUserImage();
@@ -65,91 +70,99 @@ function Navbar(props) {
 	}
 
 	return (
-		<div className='navbar__section'>
-			<div className='container-fluid'>
-				<div className='row'>
-					<div className='col-md-12 p-0'>
-						<nav className='navbar navbar-expand-lg navbar-light bg-light'>
-							<Link to='/dashboard' className='navbar-brand'>
-								<img src={logo} alt='' className='img-fluid' />
-							</Link>
-							<button
-								className='navbar-toggler d-none'
-								type='button'
-								data-toggle='collapse'
-								data-target='#navbarSupportedContent'
-								aria-controls='navbarSupportedContent'
-								aria-expanded='false'
-								aria-label='Toggle navigation'>
-								<span className='navbar-toggler-icon'></span>
-							</button>
+		<>
+			<div className='navbar__section'>
+				<div className='container-fluid'>
+					<div className='row'>
+						<div className='col-md-12 p-0'>
+							<nav className='navbar navbar-expand-lg navbar-light bg-light'>
+								<Link to='/dashboard' className='navbar-brand'>
+									<img
+										src={logo}
+										alt=''
+										className='img-fluid'
+									/>
+								</Link>
+								<button
+									className='navbar-toggler d-none'
+									type='button'
+									data-toggle='collapse'
+									data-target='#navbarSupportedContent'
+									aria-controls='navbarSupportedContent'
+									aria-expanded='false'
+									aria-label='Toggle navigation'>
+									<span className='navbar-toggler-icon'></span>
+								</button>
 
-							{/* <div
+								{/* <div
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               > */}
-							<ul className='navbar-nav mr-auto'>
-								<li className='nav-item active'>
-									<h2 className='font-weight-bold color__primary ml-md-5'>
-										{props.title}
-									</h2>
-								</li>
-							</ul>
-							<div className='form-inline my-2 my-lg-0 d-flex align-items-center'>
-								<img
-									src={noti}
-									className='navbar__notification'
-									alt=''
-								/>
-								<img
-									src={profile}
-									alt=''
-									className='img-fluid mr-2'
-									style={{ width: '40px' }}
-								/>
+								<ul className='navbar-nav mr-auto'>
+									<li className='nav-item active'>
+										<h2 className='font-weight-bold color__primary ml-md-5'>
+											{props.title}
+										</h2>
+									</li>
+								</ul>
+								<div className='form-inline my-2 my-lg-0 d-flex align-items-center'>
+									<img
+										onClick={handleNotiClick}
+										src={noti}
+										className='navbar__notification'
+										alt=''
+									/>
+									<img
+										src={profile}
+										alt=''
+										className='img-fluid mr-2'
+										style={{ width: '40px' }}
+									/>
 
-								<div className='dropdown'>
-									<button
-										className='dropdown-toggle'
-										type='button'
-										id='dropdownMenuButton'
-										data-toggle='dropdown'
-										aria-haspopup='true'
-										aria-expanded='false'>
-										{data.first_name}
-									</button>
-									<div
-										className='dropdown-menu'
-										aria-labelledby='dropdownMenuButton'>
+									<div className='dropdown'>
+										<button
+											className='dropdown-toggle'
+											type='button'
+											id='dropdownMenuButton'
+											data-toggle='dropdown'
+											aria-haspopup='true'
+											aria-expanded='false'>
+											{data.first_name}
+										</button>
 										<div
-											className='dropdown-item'
-											style={{ cursor: 'pointer' }}>
-											<Link
-												to='/profile'
-												className='text-dark'>
-												Manage Account
-											</Link>
-										</div>
-										<div
-											className='dropdown-item mt-3'
-											onClick={logOut}
-											style={{ cursor: 'pointer' }}>
-											<img
-												src={logout}
-												alt=''
-												className='img-fluid'
-											/>{' '}
-											Logout
+											className='dropdown-menu'
+											aria-labelledby='dropdownMenuButton'>
+											<div
+												className='dropdown-item'
+												style={{ cursor: 'pointer' }}>
+												<Link
+													to='/profile'
+													className='text-dark'>
+													Manage Account
+												</Link>
+											</div>
+											<div
+												className='dropdown-item mt-3'
+												onClick={logOut}
+												style={{ cursor: 'pointer' }}>
+												<img
+													src={logout}
+													alt=''
+													className='img-fluid'
+												/>{' '}
+												Logout
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							{/* </div> */}
-						</nav>
+								{/* </div> */}
+							</nav>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			{isNotiOpen && <Notifications handleClose={handleNotiClick} />}
+		</>
 	);
 }
 

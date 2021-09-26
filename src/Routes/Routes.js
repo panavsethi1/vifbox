@@ -13,8 +13,8 @@ import Notifications from './../Pages/navbar-components/Notifications';
 const Routes = () => {
 	return (
 		<Switch>
-			{/* <Route exact path='/' component={Login} /> */}
-			<Route exact path='/' component={Notifications} />
+			<Route exact path='/' component={Login} />
+			{/* <Route exact path='/' component={Notifications} /> */}
 			<Route exact path='/sign-up' component={SignUp} />
 			<Route exact path='/forget-password' component={ForgetPassword} />
 			<Route
