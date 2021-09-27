@@ -28,6 +28,26 @@
 	}
 }
 
+.navbar__image__box {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 1rem;
+}
+
+.navbar__image {
+	width: 40px;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+
 .navbar__notification {
 	width: 20px;
 	margin-right: 1rem;

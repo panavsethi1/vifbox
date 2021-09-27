@@ -205,7 +205,7 @@ function Profile() {
 
 	return (
 		<div className='profile' ref={refCallback}>
-			<Navbar title='Profile' />
+			<Navbar title='Profile' data={data} />
 
 			<section className='profile__section mt-3'>
 				<div className='container-fluid'>

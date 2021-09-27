@@ -10,6 +10,9 @@ function ProfileImage({ data, token }) {
 
 	useEffect(() => {
 		console.log(data);
+		console.log(
+			`https://ui-avatars.com/api/name=${data.name}&background=random`
+		);
 	}, []);
 
 	const handleFileChange = (e) => {
@@ -47,7 +50,7 @@ function ProfileImage({ data, token }) {
 										profileImg
 											? profileImg
 											: data.profile_img_url
-											? data.profile_img_url
+											? `https://dev.vifbox.org${data.profile_img_url}`
 											: `https://ui-avatars.com/api/name=${data.name}&background=random`
 									}
 									alt=''
@@ -82,3 +85,8 @@ function ProfileImage({ data, token }) {
 }
 
 export default ProfileImage;
+
+// `https://dev.vifbox.org${data.profile_img_url}`
+
+// localtest@gmail.com
+// Nightmare

@@ -14,7 +14,6 @@ import Notifications from './navbar-components/Notifications';
 function Navbar(props) {
 	const history = useHistory();
 	const [data, setData] = useState([]);
-	const [profileData, setProfileData] = useState();
 	const [isNotiOpen, setIsNotiOpen] = useState(false);
 	const token = localStorage.getItem('auth_pass');
 
@@ -41,22 +40,12 @@ function Navbar(props) {
 			});
 	};
 
-	const getUserImage = () => {
-		axios
-			.get(`${url}/api/profile/`, {
-				headers: { Authorization: `Bearer ${token}` },
-			})
-			.then((res) => setProfileData(res.data.data))
-			.catch((err) => console.log(err));
-	};
-
 	const handleNotiClick = () => {
 		setIsNotiOpen(!isNotiOpen);
 	};
 
 	useEffect(() => {
 		getUserData();
-		getUserImage();
 	}, []);
 
 	function logOut() {
@@ -112,12 +101,13 @@ function Navbar(props) {
 										className='navbar__notification'
 										alt=''
 									/>
-									<img
-										src={profile}
-										alt=''
-										className='img-fluid mr-2'
-										style={{ width: '40px' }}
-									/>
+									<div className='navbar__image__box'>
+										<img
+											src={`https://dev.vifbox.org${props.data.profile_img_url}`}
+											alt=''
+											className='img-fluid mr-2 navbar__image'
+										/>
+									</div>
 
 									<div className='dropdown'>
 										<button
