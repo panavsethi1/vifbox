@@ -45,7 +45,7 @@ function ForgetPassword() {
       <section className="navbar__section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-12 mt-3">
+            <div className="col-md-10 offset-1 mt-3">
               <Link to="/">
                 <img
                   src={logo}

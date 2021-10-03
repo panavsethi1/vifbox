@@ -22,40 +22,85 @@ function SignUp() {
     axios
       .post(`${url}/api/register/`, values)
       .then((res) => {
-        if (res.data.status === 200) {
+        if (res.data.code === 200) {
           Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: res,
+            icon: "success",
+            text: "Email was sent to you, please verify your email to activate your account.",
           });
           history.push("/");
         }
       })
       .catch((error) => {
-        if (error.response.data.code === 400) {
-          Swal.fire({
-            icon: "error",
-            text: error.response.data.message,
-          });
-        }
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.error,
+        });
       });
   };
 
   const onSuccess = (response) => console.log(response);
   const onFailure = (response) => console.error(response);
 
+  const isGood = (e) => {
+    const password = e.target.value;
+    var password_strength = document.getElementById("password-text");
+
+    //TextBox left blank.
+    if (password.length == 0) {
+      password_strength.innerHTML = "";
+      return;
+    }
+
+    //Regular Expressions.
+    var regex = new Array();
+    regex.push("[A-Z]"); //Uppercase Alphabet.
+    regex.push("[a-z]"); //Lowercase Alphabet.
+    regex.push("[0-9]"); //Digit.
+    regex.push("[$@$!%*#?&]"); //Special Character.
+
+    var passed = 0;
+
+    //Validate for each Regular Expression.
+    for (var i = 0; i < regex.length; i++) {
+      if (new RegExp(regex[i]).test(password)) {
+        passed++;
+      }
+    }
+
+    //Display status.
+    var strength = "";
+
+    switch (passed) {
+      case 0:
+      case 1:
+      case 2:
+        strength =
+          "<small class='progress-bar bg-danger' style='width: 40%'>Weak</small>";
+        break;
+      case 3:
+        strength =
+          "<small class='progress-bar bg-warning' style='width: 60%'>Medium</small>";
+        break;
+      case 4:
+        strength =
+          "<small class='progress-bar bg-success' style='width: 100%'>Strong</small>";
+        break;
+    }
+    password_strength.innerHTML = strength;
+  };
+
   return (
     <div className="preLogin">
       <section className="navbar__section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-12 mt-3">
+            <div className="col-md-10 offset-1 mt-3">
               <Link to="/">
                 <img
                   src={logo}
                   alt=""
                   className="img-fluid"
-                  style={{ width: "160px" }}
+                  style={{ width: "140px" }}
                 />
               </Link>
             </div>
@@ -77,7 +122,7 @@ function SignUp() {
               </p>
             </div>
           </div>
-          <div className="row mt-5 pt-md-5">
+          <div className="row mt-5">
             <div className="col-md-7">
               <Formik initialValues={initialValues} onSubmit={signUp}>
                 <Form>
@@ -124,7 +169,7 @@ function SignUp() {
                     />
                   </div>
                   <div
-                    className="form-group mt-4"
+                    className="form-group mt-3"
                     style={{ position: "relative" }}
                   >
                     <label htmlFor="password">Password</label>
@@ -136,7 +181,12 @@ function SignUp() {
                       aria-describedby="emailHelp"
                       placeholder="Enter password"
                       required
+                      onKeyUp={isGood}
                     />
+                    <small
+                      className="help-block mt-2"
+                      id="password-text"
+                    ></small>
                     <i
                       className={
                         passwordCntrl1
@@ -164,12 +214,12 @@ function SignUp() {
             <div className="col-md-1">
               <span className="vl"></span>
             </div>
-            <div className="col-md-3 d-flex justify-content-center align-items-center">
+            <div className="col-md-3 mb-5 d-flex justify-content-center align-items-center">
               <button className="btn github__btn d-flex align-items-center">
                 <img
                   src={gitHub}
-                  className="img-fluid"
-                  style={{ width: "50px" }}
+                  className="img-fluid mr-3"
+                  style={{ width: "30px" }}
                 />
                 <LoginGithub
                   clientId="65ad233b6c86eb522646"

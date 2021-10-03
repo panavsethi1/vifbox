@@ -44,13 +44,13 @@ function Login() {
       <section className="navbar__section">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-12 mt-3">
+            <div className="col-md-10 offset-1 mt-3">
               <Link to="/">
                 <img
                   src={logo}
                   alt=""
                   className="img-fluid"
-                  style={{ width: "160px" }}
+                  style={{ width: "140px" }}
                 />
               </Link>
             </div>
@@ -63,16 +63,16 @@ function Login() {
             <div className="col-md-12">
               <h1 className="text-center color__primary">Login</h1>
               <p className="text-center">
-                Don’t have an account?
+                Don’t have an account? 
                 <span className="color__secondary font-weight-bold">
-                  <Link to="/sign-up" className="color__secondary">
+                  <Link to="/sign-up" className="color__secondary ml-1">
                     Sign up
                   </Link>
                 </span>
               </p>
             </div>
           </div>
-          <div className="row mt-5 pt-md-5">
+          <div className="row mt-5">
             <div className="col-md-7">
               <Formik initialValues={initialValues} onSubmit={signIn}>
                 <Form>
@@ -89,7 +89,7 @@ function Login() {
                     />
                   </div>
                   <div
-                    className="form-group mt-4"
+                    className="form-group mt-3"
                     style={{ position: "relative" }}
                   >
                     <label htmlFor="password">Password</label>
@@ -138,7 +138,7 @@ function Login() {
                     </div>
                   </div>
 
-                  <button className="btn preLogin__btn mt-5" type="submit">
+                  <button className="btn preLogin__btn mt-4" type="submit">
                     {/* <Link to="/profile" className="text-light"> */}
                     Login
                     {/* </Link> */}
@@ -159,8 +159,8 @@ function Login() {
               <button className="btn github__btn d-flex align-items-center">
                 <img
                   src={gitHub}
-                  className="img-fluid"
-                  style={{ width: "50px" }}
+                  className="img-fluid mr-3"
+                  style={{ width: "30px" }}
                 />
                 <LoginGithub
                   clientId="65ad233b6c86eb522646"
@@ -168,8 +168,6 @@ function Login() {
                   onFailure={onFailure}
                 />
               </button>
-
-              {/* <img src={gitHub} alt="" className="img-fluid github__img" /> */}
             </div>
           </div>
         </div>

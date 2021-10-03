@@ -43,8 +43,13 @@ function Dashboard() {
       <section className="dashboard__section">
         <div className="container">
           <div className="col-md-12">
-            <img src={welcome} alt="" className="img-fluid d-block m-auto" />
-            <h1 className="text-center mt-5 pt-5 color__primary">
+            <img
+              src={welcome}
+              alt=""
+              className="img-fluid d-block m-auto"
+              style={{ width: "50%" }}
+            />
+            <h1 className="text-center mt-5 color__primary">
               {data.first_name} {data.last_name}
             </h1>
           </div>

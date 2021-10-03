@@ -6,5 +6,16 @@ select:focus {
 }
 
 body {
-  background: #e5ebef;
+  /* background: #e5ebef; */
+}
+
+a {
+  color: #26237b;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #26237b;
+  text-decoration: none !important;
 }

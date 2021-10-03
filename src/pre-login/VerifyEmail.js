@@ -1,9 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 import logo from "../logo.png";
+import url from "../Services/axois";
 import "./PreLogin.css";
 
-function SentForgetPassword() {
+function VerifyEmail() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const token = queryParams.get("token");
+  const history = useHistory();
+
+  const emailVerify = () => {
+    axios
+      .get(`${url}/api/email-verify/?token=${token}`)
+      .then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            icon: "success",
+            text: res.data.message,
+          });
+        }
+      })
+      .catch((error) => {
+        if (error.response.data) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.message,
+          });
+        }
+      });
+  };
+
+  useEffect(() => {
+    emailVerify();
+  }, []);
+
   return (
     <div className="preLogin">
       <section className="navbar__section">
@@ -26,12 +58,9 @@ function SentForgetPassword() {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="text-center color__primary">
-                Sent! Check Your Email
-              </h1>
+              <h1 className="text-center color__primary">Verification Email</h1>
               <p className="text-center">
-                Head over to your mailbox to get your reset link and create your
-                brand new password.
+                Your email verification is successfully completed
               </p>
             </div>
           </div>
@@ -39,7 +68,7 @@ function SentForgetPassword() {
             <div className="col-md-4">
               <button className="btn preLogin__btn mt-5 text-light">
                 <Link to="/" className="text-light">
-                  DONE
+                  OK
                 </Link>
               </button>
             </div>
@@ -50,4 +79,4 @@ function SentForgetPassword() {
   );
 }
 
-export default SentForgetPassword;
+export default VerifyEmail;

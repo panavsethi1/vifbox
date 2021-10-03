@@ -2,6 +2,12 @@
   background: #fff;
   height: 100vh;
 }
+
+.preLogin label {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
 .color__primary {
   color: #26237b;
 }
@@ -11,10 +17,21 @@
 }
 
 .preLogin__btn {
+  /* background: #5b922f; */
+  /* width: 100%; */
+  filter: drop-shadow(0px 18px 40px rgba(91, 146, 47, 0.25));
+  display: block;
+  margin: auto;
+  padding: 5px 40px;
+  border: 2px solid #5b922f;
+  border-radius: 50px;
+  color: #26237b;
+  font-weight: bold;
+}
+
+.preLogin__btn:hover {
   background: #5b922f;
   color: #fff;
-  width: 100%;
-  filter: drop-shadow(0px 18px 40px rgba(91, 146, 47, 0.25));
 }
 
 .preLogin__btn__outline {
@@ -34,13 +51,16 @@
   top: 0;
 }
 .github__btn {
-  border: 1px solid #5b922f;
-  padding: 8px 10px;
+  border: 1px solid #26237b;
+  /* padding: 8px 10px; */
+  /* background: #5b922f; */
+  background: linear-gradient(90deg, #fff 22%, #26237b 0);
 }
 
 .github__btn button {
   background: transparent !important;
   border: none !important;
+  color: #fff;
 }
 
 .github__btn button:focus {
@@ -60,8 +80,12 @@
 
 #change_password_eyeslash1 {
   position: absolute;
-  top: 20px;
   right: 16px;
   color: #7c96a5;
   top: 45px;
+}
+
+.progress-bar {
+  margin-top: 10px;
+  border-radius: 4px;
 }

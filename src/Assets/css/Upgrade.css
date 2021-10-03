@@ -1,0 +1,23 @@
+.upgrade__section .card-body {
+  padding: 0 15px;
+}
+
+.yellow__row {
+  background-color: #e8b943;
+}
+.dark__row {
+  background-color: #7562ec;
+}
+.blue__row {
+  background-color: #43e8c0;
+}
+.upgrade__section h1 {
+  font-size: 72px;
+}
+
+.upgrade__section .btn__book {
+  filter: drop-shadow(0px 18px 40px rgba(25, 72, 154, 0.251));
+  background: #5b922f;
+  color: #fff;
+  width: 50%;
+}
