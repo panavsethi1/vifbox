@@ -1,97 +1,101 @@
 h5 {
-  color: #000;
-  opacity: 0.8;
+	color: #000;
+	opacity: 0.8;
 }
+.profile__section {
+	margin-left: 275px;
+}
+
 .profile__section .card {
-  border-radius: 4px;
-  height: 100%;
+	border-radius: 4px;
+	height: 100%;
 }
 .profile__section label {
-  color: #7c96a5;
+	color: #7c96a5;
 }
 
 .profile__section input,
 .profile__section select {
-  background: #e5ebef;
-  border: 1px solid #e5ebef;
+	background: #e5ebef;
+	border: 1px solid #e5ebef;
 }
 .btn__close {
-  filter: drop-shadow(0px 18px 40px rgba(162, 162, 162, 0.349));
-  background: #ffffff;
-  border: 2px solid #5b922f;
-  font-size: 14px;
-  padding: 5px 40px;
+	filter: drop-shadow(0px 18px 40px rgba(162, 162, 162, 0.349));
+	background: #ffffff;
+	border: 2px solid #5b922f;
+	font-size: 14px;
+	padding: 5px 40px;
 }
 .btn__save {
-  filter: drop-shadow(0px 18px 40px rgba(25, 72, 154, 0.251));
-  background: #5b922f;
-  color: #fff;
-  display: block;
-  margin: auto;
-  font-size: 14px;
-  padding: 5px 40px;
+	filter: drop-shadow(0px 18px 40px rgba(25, 72, 154, 0.251));
+	background: #5b922f;
+	color: #fff;
+	display: block;
+	margin: auto;
+	font-size: 14px;
+	padding: 5px 40px;
 }
 
 .profile__section small {
-  opacity: 0.8;
+	opacity: 0.8;
 }
 
 .active__profile {
-  background: #26237b;
-  padding: 8px;
-  color: #fff !important;
-  border-bottom-right-radius: 50px;
-  border-top-right-radius: 50px;
-  font-size: 14px;
-  margin-bottom: 1rem;
+	background: #26237b;
+	padding: 8px;
+	color: #fff !important;
+	border-bottom-right-radius: 50px;
+	border-top-right-radius: 50px;
+	font-size: 14px;
+	margin-bottom: 1rem;
 }
 
 .css-1s2u09g-control {
-  background: #e5ebef !important;
-  border: 1px solid #e5ebef !important;
+	background: #e5ebef !important;
+	border: 1px solid #e5ebef !important;
 }
 .css-1okebmr-indicatorSeparator {
-  display: none !important;
+	display: none !important;
 }
 .css-tj5bde-Svg {
-  fill: #000 !important;
-  opacity: 0.6 !important;
+	fill: #000 !important;
+	opacity: 0.6 !important;
 }
 
 .card__options {
-  height: fit-content !important;
+	height: fit-content !important;
 }
 
 .card-tab {
-  padding: 10px 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+	padding: 10px 0px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
 }
 
 .card-tab__title {
-  margin: 0;
-  padding: 0;
-  color: #000 !important;
-  /* font-weight: 600; */
-  font-size: 14px;
-  padding: 0px 8px;
+	margin: 0;
+	padding: 0;
+	color: #000 !important;
+	/* font-weight: 600; */
+	font-size: 14px;
+	padding: 0px 8px;
 }
 
 .card-tab__arrow {
-  width: 10px;
+	width: 10px;
 }
 
 .card-profile-image {
-  height: fit-content !important;
+	height: fit-content !important;
 }
 
 .card-profile-image__content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 /* .image-upload {
@@ -101,35 +105,41 @@ h5 {
 } */
 
 .image-upload > label {
-  position: relative;
+	position: relative;
 }
 
 .image-upload__preview {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
 }
 
 .image-upload__edit {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 .image-upload__input {
-  display: none;
+	display: none;
 }
 
 .image-upload__title {
-  margin: 2rem 0;
-  text-align: center;
-  background-color: #eeeeee !important;
-  color: #7c96a5;
-  border: none;
-  outline: none;
-  font-weight: 600;
+	margin: 2rem 0;
+	text-align: center;
+	background-color: #eeeeee !important;
+	color: #7c96a5;
+	border: none;
+	outline: none;
+	font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+	.profile__section {
+		margin: auto;
+	}
 }
