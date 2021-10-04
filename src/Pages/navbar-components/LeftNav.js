@@ -13,6 +13,9 @@ function LeftNav({ page, setting, handleSettings }) {
 		if (e.target.id === 'security') {
 			setting();
 		}
+		if (window.innerWidth < 768) {
+			handleHamburger();
+		}
 	}
 
 	function handleHamburger() {

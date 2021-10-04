@@ -150,7 +150,7 @@ function Profile() {
 				setting={setting}
 				handleSettings={handleSettingsChange}
 			/>
-			<section className='profile__section mt-3'>
+			<section id='profile' className='profile__section mt-3'>
 				<div className='container-fluid'>
 					<div className='row pb-5 flex-wrap justify-between'>
 						{/* <div className="col-md-2 mt-3 p-0">
@@ -186,8 +186,8 @@ function Profile() {
 										</div>
 									</div>
 									<div className='row'>
-										<div className='col-md-4'>
-											<div className='card'>
+										<div className='col-md-4 profile__card'>
+											<div className='card '>
 												<div className='card-body'>
 													<h5>
 														PERSONAL INFORMATION
@@ -203,8 +203,8 @@ function Profile() {
 												</div>
 											</div>
 										</div>
-										<div className='col-md-4'>
-											<div className='card'>
+										<div className='col-md-4 profile__card'>
+											<div className='card '>
 												<div className='card-body'>
 													<h5>COMPANY INFORMATION</h5>
 													<small>
@@ -218,8 +218,8 @@ function Profile() {
 												</div>
 											</div>
 										</div>
-										<div className='col-md-4'>
-											<div className='card'>
+										<div className='col-md-4 profile__card'>
+											<div className='card '>
 												<div className='card-body'>
 													<h5>GENERAL PREFERENCES</h5>
 													<small>
