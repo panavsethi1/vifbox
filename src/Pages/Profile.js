@@ -16,6 +16,9 @@ import exclamation from '../Assets/img/exclamation.png';
 import arrow from '../Assets/img/right-angle-arrow.svg';
 import ProfileImage from './profile-components/ProfileImage';
 import LeftNav from './navbar-components/LeftNav';
+import company from '../Assets/img/company.png';
+import privacy from '../Assets/img/privacy.png';
+import security from '../Assets/img/security.png';
 
 function Profile() {
 	const history = useHistory();
@@ -186,51 +189,103 @@ function Profile() {
 										</div>
 									</div>
 									<div className='row'>
-										<div className='col-md-4 profile__card'>
-											<div className='card '>
+										<div className='col-lg-4 profile__card'>
+											<div
+												className='card'
+												style={{ height: '250px' }}>
 												<div className='card-body'>
-													<h5>
-														PERSONAL INFORMATION
-													</h5>
-													<small>
-														See the data in your
-														Vifbox Account
-													</small>
-													<hr />
-													<Link to='profile/personal-information'>
-														Manage your data
-													</Link>
+													<div className='content-box'>
+														<div>
+															<h5>
+																Personal
+																Information
+															</h5>
+															<small>
+																See the data in
+																your Vifbox
+																Account
+															</small>
+														</div>
+														<div>
+															<img
+																src={privacy}
+																alt=''
+															/>
+														</div>
+													</div>
+													<div className='link-box'>
+														<hr />
+														<Link to='profile/personal-information'>
+															Manage your data
+														</Link>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div className='col-md-4 profile__card'>
-											<div className='card '>
+										<div className='col-lg-4 profile__card'>
+											<div
+												className='card '
+												style={{ height: '250px' }}>
 												<div className='card-body'>
-													<h5>COMPANY INFORMATION</h5>
-													<small>
-														See the data in your
-														Vifbox Account
-													</small>
-													<hr />
-													<Link to='profile/company-information'>
-														Manage your data
-													</Link>
+													<div className='content-box'>
+														<div>
+															<h5>
+																Company
+																Information
+															</h5>
+															<small>
+																See the data in
+																your Vifbox
+																Account
+															</small>
+														</div>
+														<div>
+															<img
+																src={company}
+																alt=''
+															/>
+														</div>
+													</div>
+													<div className='link-box'>
+														<hr />
+														<Link to='profile/company-information'>
+															Manage your data
+														</Link>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div className='col-md-4 profile__card'>
-											<div className='card '>
+										<div className='col-lg-4 profile__card'>
+											<div
+												className='card'
+												style={{ height: '250px' }}>
 												<div className='card-body'>
-													<h5>GENERAL PREFERENCES</h5>
-													<small>
-														Manage settings for
-														Vifbox services on the
-														web
-													</small>
-													<hr />
-													<Link to='profile/general-information'>
-														Manage your data
-													</Link>
+													<div className='content-box'>
+														<div>
+															<h5>
+																General
+																Preferences
+															</h5>
+															<small>
+																Manage settings
+																for Vifbox
+																services on the
+																web
+															</small>
+														</div>
+														<div>
+															<img
+																src={security}
+																alt=''
+															/>
+														</div>
+													</div>
+													<div className='link-box'>
+														<hr />
+														<Link to='profile/general-information'>
+															Manage your data
+														</Link>
+													</div>
 												</div>
 											</div>
 										</div>

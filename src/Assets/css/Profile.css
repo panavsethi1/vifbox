@@ -1,6 +1,7 @@
 h5 {
 	color: #000;
 	opacity: 0.8;
+	font-size: 1.5rem;
 }
 .profile__section {
 	margin-left: 275px;
@@ -138,6 +139,21 @@ h5 {
 	font-weight: 600;
 }
 
+.profile__card .card {
+	display: flex;
+	flex-direction: column;
+}
+
+.profile__card .card .link-box {
+	position: absolute;
+	bottom: 1rem;
+	width: calc(100% - 2.5rem);
+}
+
+.profile__card .card .content-box {
+	display: flex;
+}
+
 @media screen and (max-width: 768px) {
 	.profile__section {
 		margin: 2rem auto 0 !important;
@@ -146,5 +162,12 @@ h5 {
 
 	.profile__card {
 		margin-bottom: 1rem !important;
+	}
+}
+
+@media screen and (max-width: 998px) {
+	.profile__card .card {
+		height: 200px !important;
+		margin-bottom: 1rem;
 	}
 }
