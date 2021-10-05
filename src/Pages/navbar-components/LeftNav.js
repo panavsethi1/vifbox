@@ -44,7 +44,7 @@ function LeftNav({ page, setting, handleSettings }) {
 								className={
 									settingsType === 'account'
 										? 'active__profile'
-										: 'ml-2'
+										: 'inactive__profile ml-2'
 								}
 								style={{ cursor: 'pointer' }}>
 								<i class='fas fa-user-cog'></i> Account
@@ -57,7 +57,7 @@ function LeftNav({ page, setting, handleSettings }) {
 								className={
 									settingsType === 'security'
 										? 'active__profile'
-										: 'ml-2'
+										: 'inactive__profile ml-2'
 								}
 								style={{ cursor: 'pointer' }}>
 								<i class='fas fa-user-shield'></i> Sign in &

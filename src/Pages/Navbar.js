@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logo from '../Assets/img/logo_small.png';
-import profile from '../Assets/img/profile.png';
 import logout from '../Assets/img/logout.png';
 import search from '../Assets/img/search-line.svg';
 import '../Assets/css/Navbar.css';
@@ -122,7 +121,7 @@ function Navbar(props) {
 									<img
 										src={`https://dev.vifbox.org${data.profile_img_url}`}
 										alt=''
-										className='img-fluid mr-2'
+										className='img-fluid mr-2 navbar-img'
 										style={{
 											width: '40px',
 											height: '40px',

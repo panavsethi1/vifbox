@@ -6,14 +6,10 @@ import axios from 'axios';
 import url from '../Services/axois';
 import Swal from 'sweetalert2';
 import refreshToken from '../Services/auth';
-import { Link, useHistory } from 'react-router-dom';
-import themes from './themes';
-import Dropdown from './Dropdown';
-import Select from 'react-select';
+import { Link } from 'react-router-dom';
 import tick from '../Assets/img/tick.png';
 import cross from '../Assets/img/cross.png';
 import exclamation from '../Assets/img/exclamation.png';
-import arrow from '../Assets/img/right-angle-arrow.svg';
 import ProfileImage from './profile-components/ProfileImage';
 import LeftNav from './navbar-components/LeftNav';
 import company from '../Assets/img/company.png';
@@ -21,7 +17,6 @@ import privacy from '../Assets/img/privacy.png';
 import security from '../Assets/img/security.png';
 
 function Profile() {
-	const history = useHistory();
 	const [data, setData] = useState([]);
 	const [passwordCntrl1, setpasswordCntrl1] = useState(true);
 	const [passwordCntrl2, setpasswordCntrl2] = useState(true);
