@@ -5,6 +5,7 @@ h5 {
 }
 .profile__section {
 	margin-left: 275px;
+	margin-top: 100px;
 }
 
 .profile__section .card {
@@ -168,7 +169,7 @@ h5 {
 
 @media screen and (max-width: 768px) {
 	.profile__section {
-		margin: 2rem auto 0 !important;
+		margin: 6rem auto 0 !important;
 		/* margin-top: 2rem; */
 	}
 
@@ -181,5 +182,9 @@ h5 {
 	.profile__card .card {
 		height: 200px !important;
 		margin-bottom: 1rem;
+	}
+
+	.mt-5 {
+		margin-top: 0 !important;
 	}
 }
