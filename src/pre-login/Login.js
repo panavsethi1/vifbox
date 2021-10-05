@@ -143,7 +143,7 @@ function Login() {
                     Login
                     {/* </Link> */}
                   </button>
-                  <p className="text-center mt-2" style={{ fontSize: "14px" }}>
+                  <p className="text-start mt-2" style={{ fontSize: "14px" }}>
                     By signing in, you agree to vifbox's
                     <span className="color__primary">Terms and Conditions</span>
                     and
@@ -155,7 +155,7 @@ function Login() {
             <div className="col-md-1">
               <span className="vl"></span>
             </div>
-            <div className="col-md-3 mb-5 d-flex justify-content-center align-items-center">
+            <div className="col-md-4 mb-5 d-flex justify-content-start align-items-center">
               <button className="btn github__btn d-flex align-items-center">
                 <img
                   src={gitHub}

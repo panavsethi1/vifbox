@@ -214,7 +214,7 @@ function SignUp() {
             <div className="col-md-1">
               <span className="vl"></span>
             </div>
-            <div className="col-md-3 mb-5 d-flex justify-content-center align-items-center">
+            <div className="col-md-4 mb-5 d-flex justify-content-start align-items-center">
               <button className="btn github__btn d-flex align-items-center">
                 <img
                   src={gitHub}

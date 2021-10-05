@@ -13,6 +13,8 @@ import VerifyEmail from "../pre-login/VerifyEmail";
 import PersonalInformation from "../Pages/PersonalInformation";
 import CompanyInformation from "../Pages/CompanyInformation";
 import GeneralInformation from "../Pages/GeneralInformation";
+import ChangePassword from "../Pages/ChangePassword";
+import AccountSecurity from "../Pages/AccountSecurity";
 
 const Routes = () => {
   return (
@@ -39,10 +41,20 @@ const Routes = () => {
         path="/profile/company-information"
         component={CompanyInformation}
       />
-        <PrivateRoute
+      <PrivateRoute
         exact
         path="/profile/general-information"
         component={GeneralInformation}
+      />
+      <PrivateRoute
+        exact
+        path="/profile/change-password"
+        component={ChangePassword}
+      />
+      <PrivateRoute
+        exact
+        path="/profile/account-security"
+        component={AccountSecurity}
       />
       <PrivateRoute exact path="/upgrade" component={Upgrade} />
     </Switch>

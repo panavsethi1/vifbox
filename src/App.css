@@ -19,3 +19,6 @@ a:hover {
   color: #26237b;
   text-decoration: none !important;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
